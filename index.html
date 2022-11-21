@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        .yellow{
+            background-color: yellow;
+            width: 150px;
+            display: flex;
+            justify-content: center;
+            margin: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>GET PIKACU</h1>
+
+    <button type="button" onclick="fetchData()">GET</button>
+
+    <div class="yellow">
+        <div id="main"></div>
+    </div>
+    <script>
+    async function fetchData() {
+        const response = await fetch("https://pokeapi.co/api/v2/pokemon/pikachu", {
+            method: "GET"
+        });
+    
+        const json = await response.json();
+        let id = json.id;
+        let name = json.name;
+        let image = json.sprites.front_default;
+        let types = json.types[0].type.name;
+
+        console.log(image);
+        
+
+        const divPoke = document.getElementById("main");
+        let p1 = document.createElement("p");
+        p1.innerHTML = `${id} : ${name}`;
+        let img = document.createElement("img");
+        img.src = `${image}`;
+        let p2 = document.createElement("p");
+        p2.innerHTML = `type: ${types}`;
+        divPoke.append(p1,img,p2);
+  }
+    </script>
+</body>
+</html>
